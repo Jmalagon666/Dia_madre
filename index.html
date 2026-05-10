@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Día de la Madre 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel+Decorative:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose: #c8637a;
+      --rose-light: #f2b8c6;
+      --rose-dark: #8b3a50;
+      --cream: #fdf6f0;
+      --gold: #c9a96e;
+      --green: #6b8f71;
+      --green-light: #a8c5a0;
+      --text: #3a2a2e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      font-family: 'Lato', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── PÉTALOS FLOTANTES ── */
+    .petals-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -60px;
+      width: 18px; height: 22px;
+      background: radial-gradient(ellipse at 40% 30%, #f9d0dc, #e8899a);
+      border-radius: 80% 0 80% 0;
+      opacity: 0;
+      animation: fall linear infinite;
+      filter: drop-shadow(0 2px 4px rgba(200,99,122,0.2));
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(105vh) rotate(360deg) translateX(60px); opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(200,99,122,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(107,143,113,0.06) 0%, transparent 50%),
+        var(--cream);
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 2px 2px, rgba(200,99,122,0.06) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    /* Corona floral SVG animada */
+    .crown {
+      width: 280px;
+      height: 140px;
+      margin-bottom: 10px;
+      animation: floatCrown 4s ease-in-out infinite;
+    }
+
+    @keyframes floatCrown {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .date-label {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      animation: fadeUp 1s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 400;
+      color: var(--rose-dark);
+      line-height: 1.15;
+      animation: fadeUp 1s ease both;
+      animation-delay: 0.4s;
+      text-shadow: 0 2px 20px rgba(139,58,80,0.1);
+    }
+
+    .hero h1 span {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 300;
+      color: var(--rose);
+      line-height: 1;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px auto;
+      width: min(400px, 80%);
+      animation: fadeUp 1s ease both;
+      animation-delay: 0.6s;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--rose-light), transparent);
+    }
+
+    .divider-icon { font-size: 1.4rem; }
+
+    /* ── POEMA ── */
+    .poem-section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #fff5f7 0%, #fdf6f0 50%, #f5f9f5 100%);
+    }
+
+    .poem-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 4px;
+      padding: 60px 50px;
+      box-shadow:
+        0 2px 4px rgba(200,99,122,0.04),
+        0 8px 32px rgba(200,99,122,0.08),
+        0 32px 80px rgba(200,99,122,0.05),
+        inset 0 0 0 1px rgba(200,99,122,0.08);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 1s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .poem-card::before {
+      content: '❝';
+      position: absolute;
+      top: 20px; left: 30px;
+      font-size: 5rem;
+      color: var(--rose-light);
+      font-family: Georgia, serif;
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    .poem-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--rose-light), var(--gold), var(--green-light));
+    }
+
+    .poem-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 36px;
+      text-transform: uppercase;
+    }
+
+    .poem-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      line-height: 2;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .poem-verse p {
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .poem-verse p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .poem-stanza { margin-bottom: 32px; }
+
+    /* ── MENSAJE ── */
+    .message-section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .message-section h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      color: var(--rose-dark);
+      margin-bottom: 24px;
+    }
+
+    .message-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1.9;
+      color: var(--text);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+    }
+
+    /* ── FLORES DECORATIVAS ── */
+    .flowers-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .flower-card {
+      background: white;
+      border-radius: 50%;
+      width: 110px; height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(200,99,122,0.14);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+      overflow: hidden;
+    }
+
+    .flower-card:nth-child(1) { animation-delay: 0.1s; }
+    .flower-card:nth-child(2) { animation-delay: 0.2s; }
+    .flower-card:nth-child(3) { animation-delay: 0.3s; }
+    .flower-card:nth-child(4) { animation-delay: 0.4s; }
+    .flower-card:nth-child(5) { animation-delay: 0.5s; }
+
+    .flower-card:hover {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 8px 30px rgba(200,99,122,0.2);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0) rotate(-20deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* ── BOTÓN SORPRESA ── */
+    .surprise-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(139,58,80,0.3);
+    }
+
+    .surprise-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(139,58,80,0.4);
+    }
+
+    /* Modal sorpresa */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(58,42,46,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 60px 50px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(58,42,46,0.3);
+    }
+
+    .modal-emoji { font-size: 4rem; margin-bottom: 20px; }
+
+    .modal-box h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      color: var(--rose-dark);
+      margin-bottom: 16px;
+    }
+
+    .modal-box p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--rose);
+      line-height: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(to bottom, transparent, rgba(200,99,122,0.05));
+    }
+
+    footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--rose);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── UTILIDADES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones de confeti al click */
+    .confetti-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.5rem;
+      animation: flyUp 1.5s ease forwards;
+      z-index: 200;
+    }
+
+    @keyframes flyUp {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(0.3) rotate(30deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Pétalos -->
+<div class="petals-container" id="petals"></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <!-- Corona floral SVG -->
+  <svg class="crown" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- ramas -->
+    <path d="M140 130 Q80 90 40 60" stroke="#6b8f71" stroke-width="2" fill="none"/>
+    <path d="M140 130 Q200 90 240 60" stroke="#6b8f71" stroke-width="2" fill="none"/>
+    <path d="M140 130 Q100 80 70 40" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+    <path d="M140 130 Q180 80 210 40" stroke="#a8c5a0" stroke-width="1.5" fill="none"/>
+    <!-- hojas -->
+    <ellipse cx="52" cy="55" rx="12" ry="7" fill="#6b8f71" transform="rotate(-30 52 55)" opacity="0.8"/>
+    <ellipse cx="228" cy="55" rx="12" ry="7" fill="#6b8f71" transform="rotate(30 228 55)" opacity="0.8"/>
+    <ellipse cx="78" cy="38" rx="10" ry="6" fill="#a8c5a0" transform="rotate(-45 78 38)" opacity="0.7"/>
+    <ellipse cx="202" cy="38" rx="10" ry="6" fill="#a8c5a0" transform="rotate(45 202 38)" opacity="0.7"/>
+    <!-- flores rosas grandes -->
+    <circle cx="40" cy="55" r="16" fill="#f2b8c6"/>
+    <circle cx="40" cy="55" r="8" fill="#c8637a"/>
+    <circle cx="240" cy="55" r="16" fill="#f2b8c6"/>
+    <circle cx="240" cy="55" r="8" fill="#c8637a"/>
+    <!-- flores medianas -->
+    <circle cx="70" cy="30" r="12" fill="#f9d0dc"/>
+    <circle cx="70" cy="30" r="6" fill="#e8899a"/>
+    <circle cx="210" cy="30" r="12" fill="#f9d0dc"/>
+    <circle cx="210" cy="30" r="6" fill="#e8899a"/>
+    <!-- flor central -->
+    <circle cx="140" cy="20" r="18" fill="#c8637a"/>
+    <circle cx="140" cy="20" r="9" fill="#8b3a50"/>
+    <!-- pétalos flor central -->
+    <ellipse cx="140" cy="4"  rx="7" ry="10" fill="#f2b8c6" opacity="0.9"/>
+    <ellipse cx="140" cy="36" rx="7" ry="10" fill="#f2b8c6" opacity="0.9"/>
+    <ellipse cx="124" cy="20" rx="10" ry="7" fill="#f2b8c6" opacity="0.9"/>
+    <ellipse cx="156" cy="20" rx="10" ry="7" fill="#f2b8c6" opacity="0.9"/>
+    <!-- detalles dorados -->
+    <circle cx="40" cy="55"  r="3" fill="#c9a96e"/>
+    <circle cx="240" cy="55" r="3" fill="#c9a96e"/>
+    <circle cx="70" cy="30"  r="2.5" fill="#c9a96e"/>
+    <circle cx="210" cy="30" r="2.5" fill="#c9a96e"/>
+  </svg>
+
+  <p class="date-label">✦ 10 de Mayo · 2026 ✦</p>
+
+  <h1>
+    Feliz
+    <span>Día de la Madre</span>
+  </h1>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">🌸</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--rose-dark);opacity:0.8;max-width:480px;line-height:1.7;animation:fadeUp 1s ease both;animation-delay:0.8s;">
+    Para la mujer más especial del mundo,<br>con todo el amor del universo.
+  </p>
+</section>
+
+<!-- ── FLORES ── -->
+<div class="flowers-row" style="position:relative;z-index:1;padding:0 20px;">
+  <!-- Rosa 1 — fucsia -->
+  <div class="flower-card">
+    <svg viewBox="-30 -70 60 100" width="70" height="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,28 C-3,10 2,-10 0,-18" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M-1,10 Q-18,2 -14,-10 Q-5,4 -1,10Z" fill="#6aab7a"/>
+      <path d="M1,16 Q18,8 15,-6 Q5,10 1,16Z" fill="#6aab7a" opacity="0.8"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e91e7a" opacity="0.82" transform="rotate(0 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#d81b60" opacity="0.78" transform="rotate(45 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e91e7a" opacity="0.82" transform="rotate(90 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#d81b60" opacity="0.78" transform="rotate(135 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e91e7a" opacity="0.82" transform="rotate(180 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#d81b60" opacity="0.78" transform="rotate(225 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e91e7a" opacity="0.82" transform="rotate(270 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#d81b60" opacity="0.78" transform="rotate(315 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(22.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(67.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(112.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(157.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(202.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(247.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(292.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f06292" opacity="0.9" transform="rotate(337.5 0 -18)"/>
+      <circle cx="0" cy="-18" r="11" fill="#880e4f"/>
+      <circle cx="0" cy="-18" r="6"  fill="#c2185b"/>
+      <circle cx="0" cy="-18" r="2.5" fill="#fce4ec"/>
+    </svg>
+  </div>
+
+  <!-- Rosa 2 — coral -->
+  <div class="flower-card">
+    <svg viewBox="-30 -70 60 100" width="70" height="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,28 C2,10 -2,-10 0,-18" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M-1,12 Q-20,4 -16,-8 Q-5,6 -1,12Z" fill="#6aab7a"/>
+      <path d="M1,18 Q20,10 17,-4 Q6,12 1,18Z"     fill="#6aab7a" opacity="0.8"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ff5722" opacity="0.82" transform="rotate(0 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e64a19" opacity="0.78" transform="rotate(45 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ff5722" opacity="0.82" transform="rotate(90 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e64a19" opacity="0.78" transform="rotate(135 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ff5722" opacity="0.82" transform="rotate(180 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e64a19" opacity="0.78" transform="rotate(225 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ff5722" opacity="0.82" transform="rotate(270 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#e64a19" opacity="0.78" transform="rotate(315 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(22.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(67.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(112.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(157.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(202.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(247.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(292.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ff8a65" opacity="0.9" transform="rotate(337.5 0 -18)"/>
+      <circle cx="0" cy="-18" r="11" fill="#bf360c"/>
+      <circle cx="0" cy="-18" r="6"  fill="#e64a19"/>
+      <circle cx="0" cy="-18" r="2.5" fill="#fbe9e7"/>
+    </svg>
+  </div>
+
+  <!-- Rosa 3 — rojo clásico -->
+  <div class="flower-card">
+    <svg viewBox="-30 -70 60 100" width="70" height="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,28 C-2,8 3,-8 0,-18" stroke="#2e7d32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M-1,8  Q-20,0 -16,-14 Q-5,2 -1,8Z"  fill="#388e3c"/>
+      <path d="M1,14  Q22,6 18,-8  Q6,8 1,14Z"      fill="#388e3c" opacity="0.8"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#c62828" opacity="0.85" transform="rotate(0 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#b71c1c" opacity="0.80" transform="rotate(45 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#c62828" opacity="0.85" transform="rotate(90 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#b71c1c" opacity="0.80" transform="rotate(135 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#c62828" opacity="0.85" transform="rotate(180 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#b71c1c" opacity="0.80" transform="rotate(225 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#c62828" opacity="0.85" transform="rotate(270 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#b71c1c" opacity="0.80" transform="rotate(315 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(22.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(67.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(112.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(157.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(202.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(247.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(292.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ef5350" opacity="0.9" transform="rotate(337.5 0 -18)"/>
+      <circle cx="0" cy="-18" r="11" fill="#7f0000"/>
+      <circle cx="0" cy="-18" r="6"  fill="#c62828"/>
+      <circle cx="0" cy="-18" r="2.5" fill="#ffcdd2"/>
+    </svg>
+  </div>
+
+  <!-- Rosa 4 — lavanda/lila -->
+  <div class="flower-card">
+    <svg viewBox="-30 -70 60 100" width="70" height="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,28 C3,10 -2,-8 0,-18" stroke="#4a7c59" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M-1,14 Q-18,6 -14,-8  Q-4,8 -1,14Z" fill="#6aab7a"/>
+      <path d="M1,20  Q20,12 16,-2  Q5,14 1,20Z"   fill="#6aab7a" opacity="0.8"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#7b1fa2" opacity="0.82" transform="rotate(0 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#6a1b9a" opacity="0.78" transform="rotate(45 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#7b1fa2" opacity="0.82" transform="rotate(90 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#6a1b9a" opacity="0.78" transform="rotate(135 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#7b1fa2" opacity="0.82" transform="rotate(180 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#6a1b9a" opacity="0.78" transform="rotate(225 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#7b1fa2" opacity="0.82" transform="rotate(270 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#6a1b9a" opacity="0.78" transform="rotate(315 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(22.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(67.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(112.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(157.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(202.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(247.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(292.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#ab47bc" opacity="0.9" transform="rotate(337.5 0 -18)"/>
+      <circle cx="0" cy="-18" r="11" fill="#4a148c"/>
+      <circle cx="0" cy="-18" r="6"  fill="#7b1fa2"/>
+      <circle cx="0" cy="-18" r="2.5" fill="#f3e5f5"/>
+    </svg>
+  </div>
+
+  <!-- Rosa 5 — durazno/melocotón -->
+  <div class="flower-card">
+    <svg viewBox="-30 -70 60 100" width="70" height="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,28 C-3,8 2,-10 0,-18" stroke="#388e3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M-1,10 Q-19,2 -15,-12 Q-4,4 -1,10Z" fill="#43a047"/>
+      <path d="M1,16  Q21,8 17,-6  Q5,10 1,16Z"    fill="#43a047" opacity="0.8"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#f06292" opacity="0.82" transform="rotate(0 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ec407a" opacity="0.78" transform="rotate(45 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#f06292" opacity="0.82" transform="rotate(90 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ec407a" opacity="0.78" transform="rotate(135 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#f06292" opacity="0.82" transform="rotate(180 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ec407a" opacity="0.78" transform="rotate(225 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#f06292" opacity="0.82" transform="rotate(270 0 -18)"/>
+      <ellipse cx="0" cy="-38" rx="11" ry="20" fill="#ec407a" opacity="0.78" transform="rotate(315 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(22.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(67.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(112.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(157.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(202.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(247.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(292.5 0 -18)"/>
+      <ellipse cx="0" cy="-30" rx="9" ry="15" fill="#f8bbd0" opacity="0.95" transform="rotate(337.5 0 -18)"/>
+      <circle cx="0" cy="-18" r="11" fill="#880e4f"/>
+      <circle cx="0" cy="-18" r="6"  fill="#ec407a"/>
+      <circle cx="0" cy="-18" r="2.5" fill="#fce4ec"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ── POEMA ── -->
+<section class="poem-section">
+  <div class="poem-card">
+    <p class="poem-title">✦ Un poema para ti ✦</p>
+    <div class="poem-verse" id="poem">
+      <div class="poem-stanza">
+        <p>En cada amanecer que abre sus alas de luz,</p>
+        <p>estás tú, madre, con tu sonrisa de alba.</p>
+        <p>En cada abrazo que el mundo nos da,</p>
+        <p>late tu nombre como el mar que no calla.</p>
+      </div>
+      <div class="poem-stanza">
+        <p>Tus manos, geografía de ternura,</p>
+        <p>trazaron caminos donde el miedo no cabe.</p>
+        <p>Tu voz, la más dulce de todas las músicas,</p>
+        <p>me enseñó a volar cuando el viento no sabe.</p>
+      </div>
+      <div class="poem-stanza">
+        <p>Eres el hogar que llevo en el pecho,</p>
+        <p>la raíz que me ancla y el cielo que alcanzo.</p>
+        <p>Gracias, mamá, por cada momento,</p>
+        <p>por ser mi principio, mi luz y mi descanso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENSAJE ── -->
+<section class="message-section">
+  <h2>Con todo mi amor 💝</h2>
+  <p class="message-text">
+    Mamá, no hay palabras suficientes para expresar cuánto significas para mí.
+    Gracias por tu amor incondicional, por tu paciencia infinita,
+    por estar siempre ahí. Este día es tuyo, como todos los días de mi vida
+    llevan una parte de ti.
+  </p>
+
+  <button class="surprise-btn" onclick="openModal()">
+    🎁 &nbsp; Una sorpresa para ti
+  </button>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Hecho con 💖 para la mejor mamá del mundo</p>
+</footer>
+
+<!-- ── MODAL SORPRESA ── -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-emoji">🌺</div>
+    <h3>Te quiero, mamá</h3>
+    <p>
+      "El amor de una madre es el combustible que le permite a un ser humano normal
+      hacer lo imposible." Gracias por hacernos sentir que todo es posible. 
+      Feliz Día, con todo mi corazón. ❤️
+    </p>
+  </div>
+</div>
+
+<script>
+  /* ── PÉTALOS GENERADOS ── */
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (6 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.transform = `scale(${0.5 + Math.random()})`;
+    p.style.opacity = 0.4 + Math.random() * 0.5;
+    container.appendChild(p);
+  }
+
+  /* ── REVEAL POEMA AL SCROLL ── */
+  const verses = document.querySelectorAll('#poem p');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const ps = document.querySelectorAll('#poem p');
+        ps.forEach((p, i) => {
+          setTimeout(() => p.classList.add('visible'), i * 180);
+        });
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  io.observe(document.getElementById('poem'));
+
+  /* ── MODAL ── */
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    spawnHearts();
+  }
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modal') || e.currentTarget.className === 'modal-close') {
+      document.getElementById('modal').classList.remove('open');
+    }
+  }
+
+  /* ── CORAZONES AL ABRIR MODAL ── */
+  function spawnHearts() {
+    const emojis = ['❤️','💖','💕','🌸','💗','🌺'];
+    for (let i = 0; i < 12; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'confetti-heart';
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.left = (20 + Math.random() * 60) + '%';
+        h.style.bottom = '20%';
+        h.style.animationDuration = (1 + Math.random()) + 's';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 2000);
+      }, i * 80);
+    }
+  }
+
+  /* ── CLICK FLORES ── */
+  document.querySelectorAll('.flower-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const h = document.createElement('div');
+      h.className = 'confetti-heart';
+      h.textContent = card.textContent;
+      h.style.left = card.getBoundingClientRect().left + 'px';
+      h.style.top  = card.getBoundingClientRect().top + 'px';
+      h.style.position = 'fixed';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1500);
+    });
+  });
+</script>
+</body>
+</html>
